@@ -5,7 +5,6 @@
  * Assignment 1 - part 1
  */
 
-
 public class worker {
 	
 	public int ID;

@@ -6,9 +6,9 @@
  */
 
 /*
- * This is the operating class for implement majority functionalities such as 
- * adding new worker, delete existed worker, display number of worker etc.
- * There are also some small functions for dealing I/O stream such as numerical
+ * This is the operating class for implementing main functionalities such as 
+ * adding new worker, deleting existed worker, displaying specified number of workers etc.
+ * There also are some small functions for dealing I/O stream such as numerical
  * checking and so on. For more information please read "README" file.
  */
 
@@ -44,7 +44,7 @@ public class operating {
 
 			//If user chose "add new worker".	
 			if(Cmd1.equals("1")){
-				//Initialize a "worker" to add
+				//Instantiate a "worker" to add
 				worker newWorker = new worker();
 				
 				//Jump to level 1.1: "adding level". More details in each method.
@@ -76,9 +76,11 @@ public class operating {
 						}
 					}
 					
-					//If it is not successful, notice user to try again. The detailed reasons suppose to be shown earlier. 
-					//The program will go back to top of "adding level" to add worker again.
-					//Basically following "else" statement is not reachable.
+					/*
+					 * If it is not successful, notice user to try again. The detailed reasons suppose to be shown earlier. 
+					 * The program will go back to top of "adding level" to add worker again.
+					 * Basically following "else" statement is not reachable.
+					 */
 					else{
 						System.out.println("For some reason, adding is failed. Please try again. \n"
 								+ "=========================");
@@ -100,8 +102,10 @@ public class operating {
 					displayAllWorkers();
 					displayByCate();
 					
-					//Deleting option is included in this because it needs entering workers ID to delete.
-					//By listing all workers information it will be easier to look up the ID to delete.
+					/*
+					 * Deleting option is included in this because it needs entering workers ID to delete.
+					 * By listing all workers information it will be easier to look up the ID to delete.
+					 */
 					System.out
 							.println("If you want to delete one of those workers, please enter \"d\"; "
 									+ "To back to main menu, please enter other keys.");
@@ -114,9 +118,10 @@ public class operating {
 						//More details in method.
 						deleteWorker();
 					}
-					//After deleting a worker, system will go back to top of loop to display all workers again
-					//for checking whether deleting worked or not.
-					//Moreover, to give user choice to continually deleting.
+					/*
+					 * After deleting a worker, system will go back to top of loop to display all workers again
+					 * for checking whether deleting worked or not. Moreover, to give user choice to continually deleting.
+					 */
 					
 					else
 					{
@@ -142,19 +147,26 @@ public class operating {
 	}
 	
 	
-	//Return true if "input" is a integer. Using regular expression. Referenced by any time user want to input "ID".
+	/*
+	 * Return true if "input" is a integer. Using regular expression. 
+	 * It is referenced by any time user want to input "ID".
+	*/
 	public static boolean checkInt(String input){
 		boolean mat = input.matches("\\d+");
 		return mat;
 	}
 	
-	//Method for helping dealing some checking processes while user want to input "ID" to the system.
+	/*
+	 * Method for helping dealing some checking processes 
+	 * while user want to input "ID" to the system.
+	*/
 	@SuppressWarnings("resource")
 	public static int enterID(){
-		while(true){
-			//User is going to be allowed to enter information of this new worker individually.
-			//The first one is ID, it is integer only.
-
+		while(true){			
+			/*
+			 * User is going to be allowed to enter information of this new worker individually.
+			 * The first one is ID, it is integer only.
+			 */
 			System.out.println("Please enter worker's ID, integer only:");
 			
 			//Scan user's input, pass it to string "Cmd2" for later on.
@@ -164,11 +176,11 @@ public class operating {
 			
 			//Numerical checking for user's input. See more details in method "checkInt" method.
 			if(checkInt(CmdID)){
-				
-				//If "CmdID" is integer then do the existing checking, 
-				//but first we have to pass it to convert it to integer for function "checkExist".
-				//See more details in DataStore.java.
-				
+				/*
+				 * If "CmdID" is integer then do the existing checking, 
+				 * but first we have to pass it to convert it to integer for function "checkExist".
+				 * See more details in DataStore.java.
+				 */
 				int id = Integer.parseInt(CmdID);//Parse input to integer for checking and storing into database.
 				
 				if(ds.checkExist(id)){//Checking ID just input whether exists or not.		
@@ -185,7 +197,10 @@ public class operating {
 		}
 	}
 	
-	//Function for checking whether user's input is null or not of user's name while adding new worker.
+	/*
+	 * Function for checking whether user's input is null or 
+	 * not of user's name while adding new worker.
+	 */
 	@SuppressWarnings("resource")
 	public static String enterName(){
 		while(true){
@@ -206,7 +221,10 @@ public class operating {
 		}
 	}
 	
-	//A method for allowing user to choose different gender by entering different command while adding new worker..
+	/*
+	 * A method for allowing user to choose different gender 
+	 * by entering different command while adding new worker..
+	 */
 	@SuppressWarnings("resource")
 	public static String enterGender(){
 		while (true) 
@@ -236,7 +254,10 @@ public class operating {
 		}
 	}
 	
-	//Function for letting user choose different positions while adding new worker.
+	/*
+	 * Function for letting user choose different 
+	 * positions while adding new worker.
+	 */
 	@SuppressWarnings("resource")
 	public static String enterPosition(){
 		while (true) {
@@ -270,13 +291,15 @@ public class operating {
 		}
 	}
 	
-	//Method for displaying all workers' information on screen.
+	/*
+	 * Method for displaying all workers' information on screen.
+	 */
 	public static void displayAllWorkers(){
 		
 		//Getting the total number of workers for displaying. See more details in "getNumWorker" method in "DataStore.java".
 		int numW = ds.getNumWorker();
 		
-		//Declare an array of "worker" for receiving all workers' information generated by method "getAllWorker".
+		//Instantiate an array of "worker" for receiving all workers' information generated by method "getAllWorker".
 		worker[] workers = new worker[numW];
 		workers = ds.getAllWorker();//See more details in "getAllWorker" method in "DataStore.java".
 		
@@ -290,10 +313,12 @@ public class operating {
 		System.out.println("===========================");
 	}
 	
-	//Display number of workers by individual categories.
+	/*
+	 * Display number of workers by individual categories.
+	 */
 	public static void displayByCate(){
 		
-		//Declare a "resultNum" class to store different numbers. For detailed structure of this class please go to "resultNum.java".
+		//Instantiate "resultNum" to store different numbers. For detailed structure of this class please go to "resultNum.java".
 		resultNum rsn = new resultNum();
 		
 		//The method "numByCategory" will search database to get those numbers we need. For more details please check "DataStore.java".
@@ -308,7 +333,9 @@ public class operating {
 		System.out.println("*************************************************************");
 	}
 	
-	//Method for deleting a record of worker from database.
+	/*
+	 * Method for deleting a record of worker from database.
+	 */
 	@SuppressWarnings("resource")
 	public static void deleteWorker(){
 		while (true) {
