@@ -112,7 +112,7 @@ public class DataStore {
 				i++;
 			}
 		}catch(SQLException e){
-			System.out.println("123");
+			System.out.println("Querying all workers problem in DataStore");
 			System.out.println(e.getMessage());
 		}
 		return newWorkers;//Return assigned worker array.

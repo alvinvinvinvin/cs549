@@ -34,9 +34,9 @@ public class operating {
 			
 			//Welcome informations and options for user.
 			System.out.println("welcom! \n"
-					+ "enter 1 to add new worker \n"
-					+ "enter 2 to list all workers \n"
-					+ "whenever you want to quit please enter \"quit\"");
+					+ "Enter 1 to add new worker. \n"
+					+ "Enter 2 to list all workers, list particular category of worker, and delete worker. \n"
+					+ "For quitting the system please enter \"quit\"");
 			
 			//Scan user's input and pass it to string "Cmd1" for following operations.
 			Scanner scanCmd1 = new Scanner(System.in);
@@ -83,7 +83,19 @@ public class operating {
 					 */
 					else{
 						System.out.println("For some reason, adding is failed. Please try again. \n"
+								+ "If you want to keep trying, please enter any key; \n"
+								+ "For giving up and going back to main menu, please enter \"1\"."
 								+ "=========================");
+						
+						/*
+						 * Scan user's input. If user input "1" then program will break adding loop and go back to main menu.
+						 * OW it will continue adding.
+						 */
+						Scanner scanGU = new Scanner(System.in);
+						String CmdGU = scanGU.next();
+						if(CmdGU.equals("1")){
+							break;
+						}
 					}
 				}
 				//End of the "adding level" while loop. 
@@ -125,7 +137,7 @@ public class operating {
 					
 					else
 					{
-						//If user entered other command then it will break this loop and go back to main menu.
+						//If user entered other command rather than deleting command then it will break this loop and go back to main menu.
 						break;
 					}
 				}
