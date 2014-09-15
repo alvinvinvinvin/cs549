@@ -323,6 +323,7 @@ public class operating {
 		worker[] workers = new worker[numW];
 		workers = ds.getAllWorker();//See more details in "getAllWorker" method in "DataStore.java".
 		
+		System.out.println("Here is all workers' information: \n");
 		System.out.println("ID|Name|Gender|position");
 		
 		//Display all workers line by line. Split different categories by "|".
