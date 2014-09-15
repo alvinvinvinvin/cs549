@@ -6,9 +6,10 @@
  */
 
 public class resultNum {
-	int maleNum=0;
-	int femaleNum=0;
-	int employeeNum=0;
-	int assistanNum=0;
-	int supervisorNum=0;
+	int maleEmployeeNum=0;
+	int maleAssistantNum =0;
+	int maleSupervisorNum = 0;
+	int femaleEmpoyeeNum=0;
+	int femaleAssistantNum=0;
+	int femaleSupervisorNum=0;
 }

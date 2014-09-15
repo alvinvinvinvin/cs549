@@ -33,7 +33,7 @@ public class operating {
 		while(true){
 			
 			//Welcome informations and options for user.
-			System.out.println("welcom! \n"
+			System.out.println("Welcome! \n"
 					+ "Enter 1 to add new worker. \n"
 					+ "Enter 2 to list all workers, list particular category of worker, and delete worker. \n"
 					+ "For quitting the system please enter \"quit\"");
@@ -120,7 +120,7 @@ public class operating {
 					 */
 					System.out
 							.println("If you want to delete one of those workers, please enter \"d\"; "
-									+ "To back to main menu, please enter other keys.");
+									+ "to back to main menu, please enter other keys.");
 					
 					//Scan user's input
 					Scanner scanDelete = new Scanner(System.in);
@@ -337,11 +337,12 @@ public class operating {
 		rsn = ds.numByCategory();
 		
 		//Display those values line by line.
-		System.out.println("The number of male workers is: "+rsn.maleNum);
-		System.out.println("The number of female workers is: "+rsn.femaleNum);
-		System.out.println("The number of employees is: "+rsn.employeeNum);
-		System.out.println("The number of assistants is: "+rsn.assistanNum);
-		System.out.println("The number of supervisors is: "+rsn.supervisorNum);
+		System.out.println("The number of male employees is: "+rsn.maleEmployeeNum);
+		System.out.println("The number of male assistants is: "+rsn.maleAssistantNum);
+		System.out.println("The number of male supervisors is: "+rsn.maleSupervisorNum);
+		System.out.println("The number of female employees is: "+rsn.femaleEmpoyeeNum);
+		System.out.println("The number of female assistants is: "+rsn.femaleAssistantNum);
+		System.out.println("The number of female supervisors is: "+rsn.femaleSupervisorNum);
 		System.out.println("*************************************************************");
 	}
 	
@@ -351,7 +352,8 @@ public class operating {
 	@SuppressWarnings("resource")
 	public static void deleteWorker(){
 		while (true) {
-			System.out.println("please enter worker's ID you want to delete:");
+			System.out.println("please enter worker's ID you want to delete. \n "
+					+ "To quit deleting process please enter \"b\":");
 			
 			//Scan user's input. ID is the unique property of worker so it is easier to be used for deleting specific user.
 			Scanner scanDeID = new Scanner(System.in);
@@ -385,6 +387,12 @@ public class operating {
 					System.out.println("ID does not exist. Please try again.");
 				}
 			} 
+			
+			//If user regrets to delete and enters "b", program will go back to top of "listing all worker" loop (level 1.2).
+			else if (CmdID.equalsIgnoreCase("b")){
+				break;
+			}
+			
 			else
 			{
 				//If user didn't enter an integer then system will ask him to reenter.

@@ -124,34 +124,52 @@ public class DataStore {
 		try{
 			Statement s = con.createStatement();
 			
-			//Counting number of male workers. As long as it has next record, the integer property "maleNum" of resultNum "rsn" will increase.
-			ResultSet rgm = s.executeQuery("select * from "+TABLE_NAME+" where gender='Male'");
-			while(rgm.next()){
-				rsn.maleNum++;
-			}
+			ResultSet rme = s.executeQuery("select count(*) from "+TABLE_NAME+" where gender='Male' and position='Employee'");
+			rsn.maleEmployeeNum = rme.getInt(1);
 			
-			//Counting number of female workers. Working in same way as last one.
-			ResultSet rgf = s.executeQuery("select * from "+TABLE_NAME+" where gender='Female'");
-			while(rgf.next()){
-				rsn.femaleNum++;
-			}
+			ResultSet rma = s.executeQuery("select count(*) from "+TABLE_NAME+" where gender='Male' and position='Assistant'");
+			rsn.maleAssistantNum = rma.getInt(1);
 			
-			//Counting number of employees. Working in same way as last one.
-			ResultSet rpe = s.executeQuery("select * from "+TABLE_NAME+" where position='Employee'");
-			while(rpe.next()){
-				rsn.employeeNum++;
-			}
+			ResultSet rms = s.executeQuery("select count(*) from "+TABLE_NAME+" where gender='Male' and position='Supervisor'");
+			rsn.maleSupervisorNum = rms.getInt(1);
 			
-			//Counting number of assistants. Working in same way as last one.
-			ResultSet rpa = s.executeQuery("select * from "+TABLE_NAME+" where position='Assistant'");
-			while(rpa.next()){
-				rsn.assistanNum++;
-			}
-			//Counting number of supervisors. Working in same way as last one.
-			ResultSet rps = s.executeQuery("select * from "+TABLE_NAME+" where position='Supervisor'");
-			while(rps.next()){
-				rsn.supervisorNum++;
-			}
+			ResultSet rfe = s.executeQuery("select count(*) from "+TABLE_NAME+" where gender='Female' and position='Employee'");
+			rsn.femaleEmpoyeeNum = rfe.getInt(1);
+			
+			ResultSet rfa = s.executeQuery("select count(*) from "+TABLE_NAME+" where gender='Female' and position='Assistant'");
+			rsn.femaleAssistantNum = rfa.getInt(1);
+			
+			ResultSet rfs = s.executeQuery("select count(*) from "+TABLE_NAME+" where gender='Female' and position='Supervisor'");
+			rsn.femaleSupervisorNum = rfs.getInt(1);
+			
+//			//Counting number of male workers. As long as it has next record, the integer property "maleNum" of resultNum "rsn" will increase.
+//			ResultSet rgm = s.executeQuery("select * from "+TABLE_NAME+" where gender='Male'");
+//			while(rgm.next()){
+//				rsn.maleNum++;
+//			}
+//			
+//			//Counting number of female workers. Working in same way as last one.
+//			ResultSet rgf = s.executeQuery("select * from "+TABLE_NAME+" where gender='Female'");
+//			while(rgf.next()){
+//				rsn.femaleNum++;
+//			}
+//			
+//			//Counting number of employees. Working in same way as last one.
+//			ResultSet rpe = s.executeQuery("select * from "+TABLE_NAME+" where position='Employee'");
+//			while(rpe.next()){
+//				rsn.employeeNum++;
+//			}
+//			
+//			//Counting number of assistants. Working in same way as last one.
+//			ResultSet rpa = s.executeQuery("select * from "+TABLE_NAME+" where position='Assistant'");
+//			while(rpa.next()){
+//				rsn.assistanNum++;
+//			}
+//			//Counting number of supervisors. Working in same way as last one.
+//			ResultSet rps = s.executeQuery("select * from "+TABLE_NAME+" where position='Supervisor'");
+//			while(rps.next()){
+//				rsn.supervisorNum++;
+//			}
 			
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
