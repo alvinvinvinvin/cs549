@@ -20,8 +20,10 @@ public class DataStore {
 	//Instantiate a Connection for later usage.
 	Connection con;
 
-	//Constructor for instantiating a "DataStore" in "operating.java". 
-	//The connection method is basically fixed by SQlite JDBC driver, so please don't change it.
+	/*
+	 * Constructor for instantiating a "DataStore" in "operating.java". 
+	 * The connection method is basically fixed by SQlite JDBC driver, so please don't change it.
+	 */
 	public DataStore(String db) {
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -124,52 +126,33 @@ public class DataStore {
 		try{
 			Statement s = con.createStatement();
 			
+			/*
+			 * Querying number of different categories of workers from database by SQL statements
+			 * then pass the value to matched property of resultNum "rsn".
+			 */
+			//Number of male employees.
 			ResultSet rme = s.executeQuery("select count(*) from "+TABLE_NAME+" where gender='Male' and position='Employee'");
 			rsn.maleEmployeeNum = rme.getInt(1);
 			
+			//Number of male assistants.
 			ResultSet rma = s.executeQuery("select count(*) from "+TABLE_NAME+" where gender='Male' and position='Assistant'");
 			rsn.maleAssistantNum = rma.getInt(1);
-			
+					
+			//Number of male supervisors.
 			ResultSet rms = s.executeQuery("select count(*) from "+TABLE_NAME+" where gender='Male' and position='Supervisor'");
 			rsn.maleSupervisorNum = rms.getInt(1);
 			
+			//Number of female employees.
 			ResultSet rfe = s.executeQuery("select count(*) from "+TABLE_NAME+" where gender='Female' and position='Employee'");
 			rsn.femaleEmpoyeeNum = rfe.getInt(1);
 			
+			//Number of female assistants.
 			ResultSet rfa = s.executeQuery("select count(*) from "+TABLE_NAME+" where gender='Female' and position='Assistant'");
 			rsn.femaleAssistantNum = rfa.getInt(1);
 			
+			//Number of female supervisors.
 			ResultSet rfs = s.executeQuery("select count(*) from "+TABLE_NAME+" where gender='Female' and position='Supervisor'");
 			rsn.femaleSupervisorNum = rfs.getInt(1);
-			
-//			//Counting number of male workers. As long as it has next record, the integer property "maleNum" of resultNum "rsn" will increase.
-//			ResultSet rgm = s.executeQuery("select * from "+TABLE_NAME+" where gender='Male'");
-//			while(rgm.next()){
-//				rsn.maleNum++;
-//			}
-//			
-//			//Counting number of female workers. Working in same way as last one.
-//			ResultSet rgf = s.executeQuery("select * from "+TABLE_NAME+" where gender='Female'");
-//			while(rgf.next()){
-//				rsn.femaleNum++;
-//			}
-//			
-//			//Counting number of employees. Working in same way as last one.
-//			ResultSet rpe = s.executeQuery("select * from "+TABLE_NAME+" where position='Employee'");
-//			while(rpe.next()){
-//				rsn.employeeNum++;
-//			}
-//			
-//			//Counting number of assistants. Working in same way as last one.
-//			ResultSet rpa = s.executeQuery("select * from "+TABLE_NAME+" where position='Assistant'");
-//			while(rpa.next()){
-//				rsn.assistanNum++;
-//			}
-//			//Counting number of supervisors. Working in same way as last one.
-//			ResultSet rps = s.executeQuery("select * from "+TABLE_NAME+" where position='Supervisor'");
-//			while(rps.next()){
-//				rsn.supervisorNum++;
-//			}
 			
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
@@ -187,6 +170,24 @@ public class DataStore {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	//Method for listing all existing IDs for user who want to pick a ID to be new worker' ID.
+	public String existingID(){
+		String existingID = "";
+		try {
+			Statement s = con.createStatement();
+			ResultSet r = s.executeQuery("select ID from "+TABLE_NAME);
+			
+			//Assembly all ID one by one into a string split by ",".
+			while(r.next()){
+				existingID = existingID + r.getInt(1)+",";
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return existingID;
 	}
 
 }
